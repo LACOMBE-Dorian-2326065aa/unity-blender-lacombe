@@ -3,8 +3,8 @@ using UnityEngine.AI;
 
 public class PNJRandomMovement : MonoBehaviour
 {
-    public float wanderRadius = 10f; // Rayon autour du PNJ où il peut se déplacer
-    public float wanderTimer = 5f;   // Temps avant de choisir une nouvelle destination
+    public float wanderRadius = 10f;
+    public float wanderTimer = 5f;
 
     private Transform target;
     private NavMeshAgent agent;
@@ -13,7 +13,7 @@ public class PNJRandomMovement : MonoBehaviour
     void OnEnable()
     {
         agent = GetComponent<NavMeshAgent>();
-        timer = wanderTimer; // commence immédiatement
+        timer = wanderTimer;
     }
 
     void Update()
@@ -28,7 +28,6 @@ public class PNJRandomMovement : MonoBehaviour
         }
     }
 
-    // Génère une position aléatoire sur le NavMesh
     public static Vector3 RandomNavSphere(Vector3 origin, float dist, int layermask)
     {
         Vector3 randDirection = Random.insideUnitSphere * dist;

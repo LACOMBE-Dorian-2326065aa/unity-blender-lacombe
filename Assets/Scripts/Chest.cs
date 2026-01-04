@@ -4,6 +4,7 @@ public class Chest : MonoBehaviour
 {
     public Animator animator;
     public AudioClip openSound;
+    public int value = 10;
 
     private bool isOpened = false;
 
@@ -18,34 +19,25 @@ public class Chest : MonoBehaviour
 
         if (rac == null)
         {
-            Debug.Log("Pas de RuntimeAnimatorController.");
             return;
         }
 
         AnimationClip[] clips = rac.animationClips;
 
-        Debug.Log("=== Animation Clips ===");
-
-        foreach (AnimationClip clip in clips)
-        {
-            Debug.Log("Clip : " + clip.name);
-        }
-
         if (isOpened) return;
 
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player has entered the chest trigger.");
             Inventory inv = other.GetComponent<Inventory>();
 
             if (inv != null && inv.hasKey)
             {
-                Debug.Log("Player has the key. Opening chest.");
                 animator.SetTrigger("Chest_Opening_UnCommon");
 
                 if (openSound)
                     AudioSource.PlayClipAtPoint(openSound, transform.position);
 
+                ScoreManager.Instance.AddScore(value);
                 isOpened = true;
             }
         }
